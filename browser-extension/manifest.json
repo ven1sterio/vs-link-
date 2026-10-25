@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "DeepSeek Context Bridge",
+  "version": "1.3",
+  "description": "Conecta o chat do DeepSeek ao contexto local do VS Code.",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "https://chat.deepseek.com/*",
+    "http://127.0.0.1:8765/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://chat.deepseek.com/*"],
+      "js": ["prompt.js", "parser.js", "content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

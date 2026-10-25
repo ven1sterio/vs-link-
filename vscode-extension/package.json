@@ -1,0 +1,68 @@
+{
+  "name": "deepseek-context-sync",
+  "displayName": "DeepSeek Context Sync",
+  "description": "Sincroniza o contexto do projeto com o chat web do DeepSeek, com opção de agente autônomo (Full Code).",
+  "version": "0.4.0",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "deepseekContextSync.showToken",
+        "title": "DeepSeek Context Sync: Mostrar Token"
+      }
+    ],
+    "configuration": {
+      "title": "DeepSeek Context Sync",
+      "properties": {
+        "deepseekContextSync.maxFileKB": {
+          "type": "number",
+          "default": 300,
+          "description": "Tamanho máximo (KB) de cada arquivo. Arquivos maiores são ignorados."
+        },
+        "deepseekContextSync.maxTotalKB": {
+          "type": "number",
+          "default": 800,
+          "description": "Tamanho máximo (KB) de cada envio ao chat. O excedente é omitido (contexto completo) ou fica para o próximo clique (alterações). Aumente se estiver faltando arquivos no contexto."
+        },
+        "deepseekContextSync.runCommand": {
+          "type": "string",
+          "default": "",
+          "description": "Comando executado após aplicar arquivos no modo Full Code (ex.: 'npm run build', 'cargo check'). Vazio = auto-detectar de package.json / Cargo.toml / go.mod / Python."
+        },
+        "deepseekContextSync.runTimeoutSec": {
+          "type": "number",
+          "default": 600,
+          "description": "Timeout (segundos) do comando de execução no modo Full Code (inclui npm install). Ao esgotar, o processo é encerrado e a falha é reportada ao modelo."
+        },
+        "deepseekContextSync.allowSensitiveFiles": {
+          "type": "boolean",
+          "default": true,
+          "description": "Se ligado, .env, chaves e credenciais NÃO são bloqueados: seu conteúdo é enviado ao chat e o agente pode criá-los/alterá-los. Desligue para voltar ao bloqueio. Requer recarregar a janela do VS Code."
+        },
+        "deepseekContextSync.runInTerminal": {
+          "type": "boolean",
+          "default": true,
+          "description": "Executa o build/teste no terminal integrado do VS Code (aba \"DeepSeek Agent\"), onde você acompanha ao vivo. Se não for possível (sem shell integration, PowerShell bloqueando scripts), usa um processo em segundo plano automaticamente."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "dependencies": {
+    "ws": "^8.16.0"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.80.0",
+    "@types/ws": "^8.5.10",
+    "typescript": "^5.3.0"
+  }
+}

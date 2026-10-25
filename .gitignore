@@ -1,0 +1,46 @@
+
+# Dependências
+node_modules/
+
+# Arquivos de ambiente e segredos
+.env
+.env.*
+!.env.example
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Builds e arquivos compilados
+dist/
+build/
+out/
+*.vsix
+
+# Cache
+.cache/
+.parcel-cache/
+.eslintcache
+
+# Editor e sistema
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporários
+*.tmp
+*.temp
+*.bak
+
+# Bancos locais
+*.db
+*.sqlite
+*.sqlite3
